@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .image-container {
+            margin: 20px auto;
+            max-width: 850px; /* Tamaño carta: 8.5 x 11 pulgadas */
+        }
+        .image-container img {
+            width: 100%;
+            max-height: 1100px; /* Ajuste proporcional para tamaño carta */
+            object-fit: contain;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        /* Ocultar el input de archivo */
+        input[type="file"] {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+  
+    <div class="image-container">
+        <input type="file" accept="image/*" onchange="previewImage(event, 'image1')">
+        <img id="image1" src="1.jpg">
+
+        <input type="file" accept="image/*" onchange="previewImage(event, 'image2')">
+        <img id="image2" src="2.jpg">
+
+        <input type="file" accept="image/*" onchange="previewImage(event, 'image3')">
+        <img id="image3" src="3.jpg">
+    </div>
+
+    <script>
+        function previewImage(event, imageId) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const imgElement = document.getElementById(imageId);
+                imgElement.src = e.target.result;
+            }
+            
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>
